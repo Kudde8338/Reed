@@ -1,0 +1,18 @@
+    body {
+      width: 250px;
+      padding: 10px;
+      font-family: sans-serif;
+    }
+
+    input {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 100%;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
