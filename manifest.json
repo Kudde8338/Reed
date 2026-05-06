@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
-  "name": "Flax Blocker",
+  "name": "Reed",
   "version": "1.0",
-  "description": "Closes the tab created by redirects from flaxmovies",
-    "icons": {
+  "description": "Closes the tab created by redirects from any site. (Not all sites but any site. Requires manual setup)",
+  "icons": {
     "48": "icons/icon_48.png",
     "96": "icons/icon_96.png",
     "128": "icons/icon_128.png"
