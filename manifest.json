@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Reed",
-  "version": "1.0",
+  "version": "0.1",
   "description": "Closes the tab created by redirects from any site. (Not all sites but any site. Requires manual setup)",
   "icons": {
     "48": "icons/icon_48.png",
@@ -19,7 +19,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "@flaxblockerv1",
+      "id": "@ReedV0.1",
       "data_collection_permissions": {
         "required": [
           "none"
