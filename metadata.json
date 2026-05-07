@@ -1,6 +1,6 @@
 {
   "version": { "license": "MPL-2.0" },
-  "categories": { "firefox": ["tabs", "redirects"] },
+  "categories": { "firefox": ["tabs", "games-entertainment"] },
   "contributions_url": "https://donate.mozilla.org",
   "requires_payment": false,
   "homepage": {},
