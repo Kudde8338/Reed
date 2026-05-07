@@ -1,0 +1,10 @@
+{
+  "version": { "license": "MPL-2.0" },
+  "categories": { "firefox": ["tabs", "redirects"] },
+  "contributions_url": "https://donate.mozilla.org",
+  "requires_payment": false,
+  "homepage": {},
+  "support_email": {
+    "en-US": "sydney.myren@elev.ga.ntig.se"
+  }
+}
