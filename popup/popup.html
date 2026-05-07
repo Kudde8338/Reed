@@ -7,11 +7,23 @@
 </head>
 
 <body>
-  <input id="siteInput" type="text" placeholder="example">
+  <div id="blacklist">
+    <h1>blacklist</h1>
+    <input id="blacklistInput" type="text" placeholder="example">
 
-  <button id="addButton">Add Site</button>
+    <button id="addBlacklist">Add Site</button>
 
-  <ul id="siteList"></ul>
+    <ul id="blacklistItems"></ul>
+  </div>
+
+  <div id="regular">
+    <h1>Regular</h1>
+    <input id="siteInput" type="text" placeholder="example">
+
+    <button id="addButton">Add Site</button>
+
+    <ul id="siteList"></ul>
+  </div>
 
   <script src="popup.js"></script>
 </body>

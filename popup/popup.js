@@ -1,4 +1,4 @@
-async function loadSites() {
+async function loadActiveSites() {
     const { active_sites = [] } = await browser.storage.sync.get("active_sites");
 
     const list = document.getElementById("siteList");
@@ -25,7 +25,46 @@ async function loadSites() {
                 active_sites: updated
             });
 
-            loadSites();
+            loadActiveSites();
+        });
+
+
+        li.appendChild(text);
+        li.appendChild(removeButton);
+        list.appendChild(li);
+    }
+}
+
+
+
+async function loadBlacklistedSites() {
+    const { blacklisted_sites = [] } = await browser.storage.sync.get("blacklisted_sites");
+
+    const list = document.getElementById("blacklistItems");
+    list.innerHTML = "";
+
+    for (const site of blacklisted_sites) {
+        const li = document.createElement("li");
+
+        // Add text
+        const text = document.createElement("span");
+        text.textContent = site;
+
+        // Add remove button
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "Remove";
+
+        // Remove logic
+        removeButton.addEventListener("click", async () => {
+            const { blacklisted_sites = [] } = await browser.storage.sync.get("blacklisted_sites");
+
+            const updated = blacklisted_sites.filter(s => s !== site);
+
+            await browser.storage.sync.set({
+                blacklisted_sites: updated
+            });
+
+            loadBlacklistedSites();
         });
 
 
@@ -43,8 +82,7 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
     if (!site) return;
 
-    const { active_sites = [] } =
-        await browser.storage.sync.get("active_sites");
+    const { active_sites = [] } = await browser.storage.sync.get("active_sites");
 
     if (!active_sites.includes(site)) {
         active_sites.push(site);
@@ -56,9 +94,33 @@ document.getElementById("addButton").addEventListener("click", async () => {
 
     input.value = "";
 
-    loadSites();
+    loadActiveSites();
+});
+
+document.getElementById("addBlacklist").addEventListener("click", async () => {
+
+    const input = document.getElementById("blacklistInput");
+
+    const site = input.value.trim();
+
+    if (!site) return;
+
+    const { blacklisted_sites = [] } = await browser.storage.sync.get("blacklisted_sites");
+
+    if (!blacklisted_sites.includes(site)) {
+        blacklisted_sites.push(site);
+
+        await browser.storage.sync.set({
+            blacklisted_sites
+        });
+    }
+
+    input.value = "";
+
+    loadBlacklistedSites();
 });
 
 
 
-loadSites();
+loadActiveSites();
+loadBlacklistedSites();

@@ -1,9 +1,27 @@
 body {
-  width: 250px;
+  width: 510px;
   padding: 10px;
   font-family: sans-serif;
   background-color: #863030;
 
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+
+h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: black;
+  margin: 0 0 15px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+div#regular {
+  width: 240px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,6 +36,30 @@ input#siteInput {
 button#addButton {
   width: 100%;
 }
+
+div#blacklist {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input#blacklistInput {
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+button#addBlacklist {
+  width: 100%;
+}
+
+
+
+
+
+
+
 
 ul {
   padding-left: 20px;
