@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Reed",
-  "version": "0.1",
+  "version": "0.2",
   "description": "Closes the tab created by redirects from any site. (Not all sites but any site. Requires manual setup)",
   "icons": {
     "48": "icons/icon_48.png",
