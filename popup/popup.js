@@ -1,126 +1,134 @@
-async function loadActiveSites() {
-    const { active_sites = [] } = await browser.storage.sync.get("active_sites");
+document.addEventListener("DOMContentLoaded", () => {
 
-    const list = document.getElementById("siteList");
-    list.innerHTML = "";
 
-    for (const site of active_sites) {
-        const li = document.createElement("li");
+    async function loadActiveSites() {
+        const { active_sites = [] } = await browser.storage.sync.get("active_sites");
 
-        // Add text
-        const text = document.createElement("span");
-        text.textContent = site;
+        const list = document.getElementById("siteList");
+        list.innerHTML = "";
 
-        // Add remove button
-        const removeButton = document.createElement("button");
-        removeButton.textContent = "Remove";
+        for (const site of active_sites) {
+            const li = document.createElement("li");
 
-        // Remove logic
-        removeButton.addEventListener("click", async () => {
-            const { active_sites = [] } = await browser.storage.sync.get("active_sites");
+            // Add text
+            const text = document.createElement("span");
+            text.textContent = site;
 
-            const updated = active_sites.filter(s => s !== site);
+            // Add remove button
+            const removeButton = document.createElement("button");
+            removeButton.textContent = "Remove";
 
-            await browser.storage.sync.set({
-                active_sites: updated
+            // Remove logic
+            removeButton.addEventListener("click", async () => {
+                const { active_sites = [] } = await browser.storage.sync.get("active_sites");
+
+                const updated = active_sites.filter(s => s !== site);
+
+                await browser.storage.sync.set({
+                    active_sites: updated
+                });
+
+                loadActiveSites();
             });
 
-            loadActiveSites();
-        });
 
-
-        li.appendChild(text);
-        li.appendChild(removeButton);
-        list.appendChild(li);
+            li.appendChild(text);
+            li.appendChild(removeButton);
+            list.appendChild(li);
+        }
     }
-}
 
 
 
-async function loadBlacklistedSites() {
-    const { blacklisted_sites = [] } = await browser.storage.sync.get("blacklisted_sites");
+    async function loadBlacklistedSites() {
+        const { blacklisted_sites = [] } = await browser.storage.sync.get("blacklisted_sites");
 
-    const list = document.getElementById("blacklistItems");
-    list.innerHTML = "";
+        const list = document.getElementById("blacklistItems");
+        list.innerHTML = "";
 
-    for (const site of blacklisted_sites) {
-        const li = document.createElement("li");
+        for (const site of blacklisted_sites) {
+            const li = document.createElement("li");
 
-        // Add text
-        const text = document.createElement("span");
-        text.textContent = site;
+            // Add text
+            const text = document.createElement("span");
+            text.textContent = site;
 
-        // Add remove button
-        const removeButton = document.createElement("button");
-        removeButton.textContent = "Remove";
+            // Add remove button
+            const removeButton = document.createElement("button");
+            removeButton.textContent = "Remove";
 
-        // Remove logic
-        removeButton.addEventListener("click", async () => {
-            const { blacklisted_sites = [] } = await browser.storage.sync.get("blacklisted_sites");
+            // Remove logic
+            removeButton.addEventListener("click", async () => {
+                const { blacklisted_sites = [] } = await browser.storage.sync.get("blacklisted_sites");
 
-            const updated = blacklisted_sites.filter(s => s !== site);
+                const updated = blacklisted_sites.filter(s => s !== site);
 
-            await browser.storage.sync.set({
-                blacklisted_sites: updated
+                await browser.storage.sync.set({
+                    blacklisted_sites: updated
+                });
+
+                loadBlacklistedSites();
             });
 
-            loadBlacklistedSites();
-        });
 
-
-        li.appendChild(text);
-        li.appendChild(removeButton);
-        list.appendChild(li);
-    }
-}
-
-document.getElementById("addButton").addEventListener("click", async () => {
-
-    const input = document.getElementById("siteInput");
-
-    const site = input.value.trim();
-
-    if (!site) return;
-
-    const { active_sites = [] } = await browser.storage.sync.get("active_sites");
-
-    if (!active_sites.includes(site)) {
-        active_sites.push(site);
-
-        await browser.storage.sync.set({
-            active_sites
-        });
+            li.appendChild(text);
+            li.appendChild(removeButton);
+            list.appendChild(li);
+        }
     }
 
-    input.value = "";
+    document.getElementById("addButton").addEventListener("click", async () => {
+
+        const input = document.getElementById("siteInput");
+
+        const site = input.value.trim();
+
+        if (!site) return;
+
+        const { active_sites = [] } = await browser.storage.sync.get("active_sites");
+
+        if (!active_sites.includes(site)) {
+            active_sites.push(site);
+
+            await browser.storage.sync.set({
+                active_sites
+            });
+        }
+
+        input.value = "";
+
+        loadActiveSites();
+    });
+
+    document.getElementById("addBlacklist").addEventListener("click", async () => {
+
+        const input = document.getElementById("blacklistInput");
+
+        const site = input.value.trim();
+
+        if (!site) return;
+
+        const { blacklisted_sites = [] } = await browser.storage.sync.get("blacklisted_sites");
+
+        if (!blacklisted_sites.includes(site)) {
+            blacklisted_sites.push(site);
+
+            await browser.storage.sync.set({
+                blacklisted_sites
+            });
+        }
+
+        input.value = "";
+
+        loadBlacklistedSites();
+    });
+
+
 
     loadActiveSites();
-});
-
-document.getElementById("addBlacklist").addEventListener("click", async () => {
-
-    const input = document.getElementById("blacklistInput");
-
-    const site = input.value.trim();
-
-    if (!site) return;
-
-    const { blacklisted_sites = [] } = await browser.storage.sync.get("blacklisted_sites");
-
-    if (!blacklisted_sites.includes(site)) {
-        blacklisted_sites.push(site);
-
-        await browser.storage.sync.set({
-            blacklisted_sites
-        });
-    }
-
-    input.value = "";
-
     loadBlacklistedSites();
+
+
+
+
 });
-
-
-
-loadActiveSites();
-loadBlacklistedSites();
