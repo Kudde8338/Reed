@@ -12,7 +12,8 @@
     "storage",
     "webRequest",
     "webRequestBlocking",
-    "<all_urls>"
+    "<all_urls>",
+    "history"
   ],
   "browser_action": {
     "default_popup": "popup/popup.html"
