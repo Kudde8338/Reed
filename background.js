@@ -36,7 +36,7 @@ browser.tabs.onUpdated.addListener(
 
     if (blacklisted) {
       browser.tabs.remove(tabId);
-      await browser.history.deleteUrl({ url: details.url });
+      await browser.history.deleteUrl({ url: changeInfo.url });
       console.log(`Closed blacklisted tab: ${url}`);
     }
   }
